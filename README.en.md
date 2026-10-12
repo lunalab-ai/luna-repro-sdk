@@ -1,5 +1,11 @@
 # LUNA Repro SDK
 
+SDK 0.3.0 adds `configure/connect`, `select`, `publish` and `capture` while preserving the Page API. Put `selected = repro.select()` in your final research cell to discover local candidates, then check, title, order, preview and explicitly send them. Purpose-based ranking uses local name matches, not AI. It never uploads whole namespaces, models or directories.
+
+[Simple selection guide](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/docs/selection-en.md) · [한국어 안내](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/docs/selection-ko.md) · [Synthetic Colab demo](https://colab.research.google.com/github/lunalab-ai/luna-repro-sdk/blob/v0.3.0/examples/quickstart.ipynb)
+
+First approve `repro.connect(your_project_uuid, label="Colab")` in your browser; the key remains in memory. Use `repro.select()` in the final cell, or explicitly request immediate sending with `repro.publish(fig, df, metrics, title="Method comparison")`. Declare exact execution/evaluation evidence through the existing Page API. The base SDK has no extra dependencies; NumPy/pandas/matplotlib/PIL objects are supported when those packages are already installed. Plotly static export and torch CPU conversion have separate explicit requirements.
+
 [한국어](README.md) · [SDK installation](docs/installation-en.md) · [SDK usage and API reference](docs/usage-en.md) · [Platform handbook](https://lunalab-ai.com/workspace/repro/guide/?lang=EN) · [Browser demo](https://lunalab-ai.com/workspace/repro/demo/?lang=EN)
 
 Collect explicitly selected results from Python, Colab or your own server into LUNA result pages. The SDK does not run research, provision GPUs, call AI, or upload directories. Package: `luna-repro`; import: `luna_repro`; CLI: `luna-repro`. Requires Python 3.10+ with no runtime dependencies.
@@ -9,11 +15,11 @@ Collect explicitly selected results from Python, Colab or your own server into L
 Inside your project virtual environment:
 
 ```bash
-python -m pip install https://github.com/lunalab-ai/luna-repro-sdk/releases/download/v0.2.1/luna_repro-0.2.1-py3-none-any.whl
+python -m pip install https://github.com/lunalab-ai/luna-repro-sdk/releases/download/v0.3.0/luna_repro-0.3.0-py3-none-any.whl
 python -c "import luna_repro; print(luna_repro.__version__)"
 ```
 
-Expect `0.2.1`. Use `%pip install ...` in a separate Colab installation cell. This uses the repository release, not a PyPI package listing. Download and extract `luna-repro-sdk-0.2.1.zip` for `luna-repro-sdk/examples/`; pip does not install or execute teaching notebooks. The ZIP is also installable with `python -m pip install ./luna-repro-sdk-0.2.1.zip`, but building from ZIP may need network access for build tools. Prefer the wheel for offline installation.
+Expect `0.3.0`. Use `%pip install ...` in a separate Colab installation cell. This uses the repository release, not a PyPI package listing. Download and extract `luna-repro-sdk-0.3.0.zip` for `luna-repro-sdk/examples/`; pip does not install or execute teaching notebooks. The ZIP is also installable with `python -m pip install ./luna-repro-sdk-0.3.0.zip`, but building from ZIP may need network access for build tools. Prefer the wheel for offline installation.
 
 ## Complete offline example
 
@@ -35,7 +41,7 @@ destination = Path(".luna-repro") / (str(uuid.uuid4()) + ".json")
 print(page.save(destination))
 ```
 
-`python examples/walkthrough.py` computes two results with MAE/RMSE `0.5 → approximately 0.1` and saves them locally. `toy.py` and the browser demo use a different noisy-signal/moving-average calculation. Do not compare these teaching numbers as research performance. After SDK installation, default calculation and save steps remain offline. The notebook installation cell may use the network when SDK 0.2.1 is absent.
+`python examples/walkthrough.py` computes two results with MAE/RMSE `0.5 → approximately 0.1` and saves them locally. `toy.py` and the browser demo use a different noisy-signal/moving-average calculation. Do not compare these teaching numbers as research performance. After SDK installation, default calculation and save steps remain offline. The notebook installation cell may use the network when SDK 0.3.0 is absent.
 
 ## Explicit publication
 
@@ -74,7 +80,7 @@ Automatic source metadata identifies the registration call, not the original cal
 
 Limits: 8 MiB per image, 16 MiB JSON bundle, 2,000 rows/100 columns per table. Selected source files: 1 MiB; preserved code: 32 KiB/1,000 lines per reference and 256 KiB per page including inherited copies. Try `walkthrough.py --include-source` to preserve selected teaching functions. The notebook defaults to `INCLUDE_SOURCE=False`; configure its real saved file and cell identity before enabling it.
 
-SDK `0.2.1` uses `luna.repro.page.v1` and optional `luna.repro.source.v1`. SDK and platform versions are independent. The server rechecks current project permissions and its own limits. Report composition, Notion delivery and AI review are platform features, not automatic SDK execution.
+SDK `0.3.0` uses `luna.repro.page.v1` and optional `luna.repro.source.v1`. SDK and platform versions are independent. The server rechecks current project permissions and its own limits. Report composition, Notion delivery and AI review are platform features, not automatic SDK execution.
 
 ## Development and release checks
 

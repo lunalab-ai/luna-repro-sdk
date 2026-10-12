@@ -1,6 +1,12 @@
 # LUNA Repro SDK
 
-[English](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.2.1/README.en.md) · [상세 가이드](https://lunalab-ai.com/workspace/repro/guide/?lang=KO) · [브라우저 데모](https://lunalab-ai.com/workspace/repro/demo/?lang=KO)
+SDK 0.3.0은 기존 Page API에 `configure/connect`, `select`, `publish`, `capture`를 추가합니다. 연구 마지막 셀의 `selected = repro.select()`로 로컬 후보를 찾고, 체크·제목·순서·미리보기 후 명시적으로 전송할 수 있습니다. 목적 설명은 로컬 이름 일치 추천이며 AI 호출이 아닙니다. 모델·폴더·namespace 전체를 전송하지 않습니다.
+
+[새 간편 사용법](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/docs/selection-ko.md) · [English selection guide](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/docs/selection-en.md) · [Colab 합성 데모](https://colab.research.google.com/github/lunalab-ai/luna-repro-sdk/blob/v0.3.0/examples/quickstart.ipynb)
+
+처음에는 `repro.connect(실제_프로젝트_UUID, label="Colab")`로 브라우저에서 승인하세요. 연결 키는 메모리에만 둡니다. 마지막 셀은 `repro.select()`이며, 이미 전송할 객체를 아는 경우 `repro.publish(fig, df, metrics, title="방법 비교")`가 즉시 전송을 요청합니다. 정확한 연구 실행·평가 상태는 기존 Page API로 명시합니다. 기본 설치는 추가 의존성이 없고 NumPy/pandas/matplotlib/PIL 객체는 해당 패키지가 이미 설치된 환경에서 지원합니다. Plotly 정적 exporter와 torch CPU 변환은 별도 명시 조건이 있습니다.
+
+[English](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/README.en.md) · [상세 가이드](https://lunalab-ai.com/workspace/repro/guide/?lang=KO) · [브라우저 데모](https://lunalab-ai.com/workspace/repro/demo/?lang=KO)
 
 Python·Colab·자체 서버의 기존 연구 코드에서 선택한 결과를 LUNA 플랫폼에 정리하는 작은 SDK입니다. 계산·GPU·AI를 실행하거나 폴더를 자동 업로드하지 않습니다. 패키지는 `luna-repro`, import는 `luna_repro`, CLI는 `luna-repro`입니다. Python 3.10 이상이며 런타임 의존성이 없습니다.
 
@@ -9,11 +15,11 @@ Python·Colab·자체 서버의 기존 연구 코드에서 선택한 결과를 L
 프로젝트 가상환경에서 버전을 고정하여 설치하세요. PyPI 설치 명령이 아니라 이 저장소의 릴리스 wheel을 사용합니다.
 
 ```bash
-python -m pip install https://github.com/lunalab-ai/luna-repro-sdk/releases/download/v0.2.1/luna_repro-0.2.1-py3-none-any.whl
+python -m pip install https://github.com/lunalab-ai/luna-repro-sdk/releases/download/v0.3.0/luna_repro-0.3.0-py3-none-any.whl
 python -c "import luna_repro; print(luna_repro.__version__)"
 ```
 
-`0.2.1`이 표시되어야 합니다. Colab에서는 첫 줄의 `python -m pip` 대신 `%pip`를 사용하세요. 예제는 pip 설치와 별개입니다. 릴리스의 `luna-repro-sdk-0.2.1.zip`을 풀면 `luna-repro-sdk/examples/`에서 노트북과 Python 파일을 열 수 있습니다. ZIP 자체도 `python -m pip install ./luna-repro-sdk-0.2.1.zip`으로 설치할 수 있으며 빌드 도구 설치에 인터넷이 필요할 수 있습니다. 오프라인 설치에는 wheel을 권장합니다.
+`0.3.0`이 표시되어야 합니다. Colab에서는 첫 줄의 `python -m pip` 대신 `%pip`를 사용하세요. 예제는 pip 설치와 별개입니다. 릴리스의 `luna-repro-sdk-0.3.0.zip`을 풀면 `luna-repro-sdk/examples/`에서 노트북과 Python 파일을 열 수 있습니다. ZIP 자체도 `python -m pip install ./luna-repro-sdk-0.3.0.zip`으로 설치할 수 있으며 빌드 도구 설치에 인터넷이 필요할 수 있습니다. 오프라인 설치에는 wheel을 권장합니다.
 
 ## 먼저 로컬에서 확인하기
 
@@ -75,11 +81,11 @@ CLI는 환경 변수 `LUNA_REPRO_ENDPOINT`, `LUNA_REPRO_TOKEN`을 사용합니�
 
 이미지 최대 8 MiB, JSON 묶음 16 MiB, 표 2,000행/100열입니다. 출처 파일은 1 MiB, 선택 코드 32 KiB·1,000줄/출처, 상속 포함 256 KiB/페이지입니다. `walkthrough.py --include-source`로 선택 계산 함수 보존을 연습할 수 있습니다. 노트북은 `INCLUDE_SOURCE=False`가 기본입니다. 실제 파일·셀 ID를 설정한 뒤 명시적으로 선택하세요.
 
-SDK `0.2.1`은 `luna.repro.page.v1` 및 선택 확장 `luna.repro.source.v1`을 사용합니다. 플랫폼 버전과 SDK 버전은 독립적입니다. 서버의 현재 프로젝트 권한·수신 검사·한도가 최종 기준입니다. 보고서·Notion·AI 기능은 플랫폼에서 수행하며 SDK가 원격 연구 실행 또는 코드 개선을 자동 수행하지 않습니다.
+SDK `0.3.0`은 `luna.repro.page.v1` 및 선택 확장 `luna.repro.source.v1`을 사용합니다. 플랫폼 버전과 SDK 버전은 독립적입니다. 서버의 현재 프로젝트 권한·수신 검사·한도가 최종 기준입니다. 보고서·Notion·AI 기능은 플랫폼에서 수행하며 SDK가 원격 연구 실행 또는 코드 개선을 자동 수행하지 않습니다.
 
 ## 문서·개발·릴리스 검증
 
-[설치 안내](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.2.1/docs/installation-ko.md)와 [전체 한영 매뉴얼](https://github.com/lunalab-ai/luna-repro-sdk/tree/v0.2.1/docs)을 제공합니다. 별도 가이드 ZIP은 매뉴얼과 실습 파일이며 SDK installer는 포함하지 않습니다. Git checkout에서 다음 검사를 실행합니다. ZIP에 개발 검사 파일이 없는 것은 의도된 배포 구분입니다.
+[설치 안내](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/docs/installation-ko.md)와 [전체 한영 매뉴얼](https://github.com/lunalab-ai/luna-repro-sdk/tree/v0.3.0/docs)을 제공합니다. 별도 가이드 ZIP은 매뉴얼과 실습 파일이며 SDK installer는 포함하지 않습니다. Git checkout에서 다음 검사를 실행합니다. ZIP에 개발 검사 파일이 없는 것은 의도된 배포 구분입니다.
 
 ```bash
 python -m unittest discover -s tests -v

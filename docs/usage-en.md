@@ -1,8 +1,10 @@
 # SDK usage and API reference
 
+Start with the [new selection guide](https://github.com/lunalab-ai/luna-repro-sdk/blob/v0.3.0/docs/selection-en.md) for browser connection and local candidate discovery. The existing Page API and manual-key workflow below remain supported.
+
 [Installation](installation-en.md) · [Platform handbook](https://lunalab-ai.com/workspace/repro/guide/?lang=EN)
 
-SDK 0.2.1 offline practice and explicit result publication. The platform handbook remains the canonical source for report, Notion, AI and permission workflows. Example paths refer to the extracted SDK practice archive. UUIDs are synthetic teaching identifiers.
+SDK 0.3.0 offline practice and explicit result publication. The platform handbook remains the canonical source for report, Notion, AI and permission workflows. Example paths refer to the extracted SDK practice archive. UUIDs are synthetic teaching identifiers.
 
 ## 1. The smallest complete Python example
 
@@ -446,7 +448,7 @@ When asking for help, include the page URL, time, SDK version, error code, expec
 
 This practice teaches result registration and reporting. Scientific reproducibility additionally requires precise code, data, model, environment and evaluation identities, followed by separate execution and review evidence.
 
-## 12. Preserve calculation lines, cells and selected code with SDK 0.2.1
+## 12. Preserve calculation lines, cells and selected code with SDK 0.3.0
 
 **A filename-only older result contains limited original evidence.** Its fixed revision is not rewritten. Use the helpers below when registering new results to include a precise location and optional selected text. Recreating the web synthetic demo adds a new CPU-computed, source-enriched revision to the same canonical example page ID. Previous content, hashes and report references remain intact, and an identical repeated request does not create another revision. Trashed examples are never automatically restored. The public finished example also offers **Calculation source → View calculation code**, opening the corresponding lines of the actual teaching file.
 
@@ -466,7 +468,7 @@ The default SDK can record the Python call that registers a result. It does not 
 
 ### 24.2 A complete runnable Python-file example
 
-Install SDK 0.2.1, save this code as a new `source_example.py`, and run `python source_example.py`. It uses `__file__`, so it is a file example rather than a cell to paste unchanged into a notebook. It saves the MAE of three synthetic values (0.5), the calculation function's actual lines and its selected text to local JSON. The UUID is for offline practice. No network, GPU or AI call occurs. Every execution uses a new page ID and preserves previous files.
+Install SDK 0.3.0, save this code as a new `source_example.py`, and run `python source_example.py`. It uses `__file__`, so it is a file example rather than a cell to paste unchanged into a notebook. It saves the MAE of three synthetic values (0.5), the calculation function's actual lines and its selected text to local JSON. The UUID is for offline practice. No network, GPU or AI call occurs. Every execution uses a new page ID and preserves previous files.
 
 ```python
 from pathlib import Path

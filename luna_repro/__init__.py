@@ -2,8 +2,12 @@
 
 from .client import Page, PublishError, Section, load_bundle, publish_bundle, sync
 from . import source
+from .session import configure, clear
+from .connection import connect
+from .selection import select, publish, Selection
+from .capture import capture
 
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
 
 def page(project, title, **kwargs):
@@ -11,4 +15,4 @@ def page(project, title, **kwargs):
     return Page(project, title, **kwargs)
 
 
-__all__ = ["Page", "Section", "PublishError", "page", "load_bundle", "publish_bundle", "sync", "source"]
+__all__ = ["Page", "Section", "PublishError", "page", "load_bundle", "publish_bundle", "sync", "source", "configure", "clear", "connect", "select", "publish", "Selection", "capture"]

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-10-12
+
+- Add browser approval with session-only project credentials and bounded polling.
+- Add local namespace discovery, purpose/name ranking, optional notebook checkboxes, editable titles/order, offline HTML preview and explicit publication.
+- Freeze selected values before review/send; preserve outbox, request identity and existing Page/v1 contracts.
+- Add bounded scientific object adapters, explicit array display ranges and row subsets, and opt-in tensor CPU conversion.
+- Add explicit saved-rule automatic-send policy and scoped matplotlib show/close capture with failure/warning counts.
+- Add bilingual selection guides and an offline-by-default synthetic quickstart. No automatic AI request, directory upload, causal-source guarantee or research-success claim.
+
 ## 0.2.1 — 2026-10-12
 
 - Extract the existing SDK into an independent, public-safe repository.

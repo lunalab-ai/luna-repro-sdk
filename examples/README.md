@@ -1,12 +1,16 @@
 # 재현성 결과 등록 예제 / Result-page examples
 
+- `quickstart.ipynb`: SDK 0.3.0 설치·합성 결과 선택·로컬 HTML 미리보기. 브라우저 연결과 전송은 별도 기본 꺼짐입니다. Installation, synthetic selection and local preview; separate connection/publication flags default off.
+- `auto_select.py`: 표준 라이브러리 CPU 실습입니다. 새 로컬 폴더에 미리보기·JSON·선택 규칙을 저장하며 연결·전송하지 않습니다. Standard-library CPU example saves preview, bundle and selection rule in a new local folder without connecting or publishing.
+- `docs/selection-ko.md`, `docs/selection-en.md`: 일반 연구 객체·체크 UI·capture·명시 자동 규칙·출처 한계를 안내합니다. Scientific objects, checkboxes, capture, explicit automatic rules and source limits.
+
 이 폴더에는 실제 연구 원본·모델·데이터·비밀을 넣지 않습니다. `toy.py`는 결정적 합성 CPU 예제, `pasa_adapter.py`는 사용자가 지정한 기존 출력에서 일부 결과를 읽는 어댑터입니다. 업로드와 실제 Pasa 실행은 별개입니다.
 
 ## 처음부터 따라하기 / Start here
 
 [국문 설명서](https://lunalab-ai.com/workspace/repro/guide/?lang=KO) · [English handbook](https://lunalab-ai.com/workspace/repro/guide/?lang=EN)
 
-`walkthrough.ipynb`는 설치·오프라인 계산·저장·선택적 전송·재시도를 셀별로 안내합니다. 기본 `PUBLISH=False`, `RETRY=False`이므로 전체 셀을 실행해도 전송하지 않습니다. 실제 프로젝트 UUID를 설정하고 계산/저장 셀을 다시 실행한 뒤, 전송 셀만 명시적으로 활성화하세요. 연결 키는 숨김 입력으로 받습니다. 첫 설치 셀은 SDK 0.2.1이 없을 때만 공개 wheel을 받으므로 이 단계에는 네트워크가 필요합니다.
+`walkthrough.ipynb`는 설치·오프라인 계산·저장·선택적 전송·재시도를 셀별로 안내합니다. 기본 `PUBLISH=False`, `RETRY=False`이므로 전체 셀을 실행해도 전송하지 않습니다. 실제 프로젝트 UUID를 설정하고 계산/저장 셀을 다시 실행한 뒤, 전송 셀만 명시적으로 활성화하세요. 연결 키는 숨김 입력으로 받습니다. 첫 설치 셀은 SDK 0.3.0이 없을 때만 공개 wheel을 받으므로 이 단계에는 네트워크가 필요합니다.
 
 `walkthrough.py`도 기본 오프라인입니다. 프로젝트 환경에 SDK를 설치한 뒤 실행합니다.
 
@@ -18,7 +22,7 @@ python examples/walkthrough.py --project YOUR-PROJECT-UUID --publish
 
 명령은 압축을 푼 `luna-repro-sdk/` 또는 Git checkout 루트에서 실행합니다. `.luna-repro/walkthrough/새실행폴더/`에 baseline/corrected JSON을 저장하며, 전송 시 그 폴더의 `outbox/`를 사용합니다. six-value offset 예제의 MAE/RMSE는 0.5와 약 0.1입니다. 아래 `toy.py`와 브라우저 데모의 잡음 신호·이동평균 수치와는 별개의 합성 예제입니다.
 
-`walkthrough.ipynb` explains installation, offline computation, saving, optional publication and explicit retry one cell at a time. The installation cell uses the network only when SDK 0.2.1 is absent. After installation, default calculation/save cells are offline; `PUBLISH=False` and `RETRY=False` prevent result transmission. Set your real project UUID, rerun computation/saving, then explicitly enable only the publication cell. Keys are entered through a hidden prompt.
+`walkthrough.ipynb` explains installation, offline computation, saving, optional publication and explicit retry one cell at a time. The installation cell uses the network only when SDK 0.3.0 is absent. After installation, default calculation/save cells are offline; `PUBLISH=False` and `RETRY=False` prevent result transmission. Set your real project UUID, rerun computation/saving, then explicitly enable only the publication cell. Keys are entered through a hidden prompt.
 
 After SDK installation, run `walkthrough.py` without flags for offline practice. Add your real `--project` UUID and `--publish` only when you intend transmission and have configured the session endpoint. In the downloadable ZIP use `examples/walkthrough.py`. Each run preserves files under a new `.luna-repro/walkthrough/` subdirectory with its own outbox. Six-value correction yields MAE/RMSE 0.5 and approximately 0.1; these are a different synthetic example from the noisy-signal/moving-average toy below.
 

@@ -25,7 +25,7 @@ class DistributionTests(unittest.TestCase):
     def test_legacy_archive_is_exact_and_repeatable(self):
         first = zip_bytes(ROOT, LEGACY, PREFIX)
         self.assertEqual(first, zip_bytes(ROOT, LEGACY, PREFIX))
-        self.assertEqual(len(LEGACY), 14)
+        self.assertEqual(len(LEGACY), 21)
         self.assertEqual(datetime.fromtimestamp(EPOCH, timezone.utc).strftime("%Y-%m-%d"), "2026-10-12")
         with zipfile.ZipFile(io.BytesIO(first)) as archive:
             self.assertEqual(archive.namelist(), [PREFIX + name for name in sorted(LEGACY)])

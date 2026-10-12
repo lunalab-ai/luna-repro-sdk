@@ -387,7 +387,7 @@ class ExampleTests(unittest.TestCase):
     def test_notebook_examples_have_no_outputs_and_valid_python_cells(self):
         paths = list((REPO_ROOT / "examples").glob("*.ipynb"))
         self.assertEqual({path.name for path in paths},
-                         {"last_cell.ipynb", "incremental.ipynb", "walkthrough.ipynb"})
+                         {"last_cell.ipynb", "incremental.ipynb", "walkthrough.ipynb", "quickstart.ipynb"})
         for path in paths:
             notebook = json.loads(path.read_text(encoding="utf-8"))
             for cell in notebook["cells"]:
