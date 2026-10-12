@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "luna-repro"
+version = "0.2.1"
+description = "Explicit, local-first research result pages for LUNA Research Platform"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "LUNA Lab"}]
+dependencies = []
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent"]
+
+[project.urls]
+Homepage = "https://github.com/lunalab-ai/luna-repro-sdk"
+Documentation = "https://lunalab-ai.com/workspace/repro/guide/"
+Source = "https://github.com/lunalab-ai/luna-repro-sdk"
+Issues = "https://github.com/lunalab-ai/luna-repro-sdk/issues"
+
+[project.scripts]
+luna-repro = "luna_repro.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["luna_repro*"]
+exclude = ["tests*", "examples*", "scripts*"]

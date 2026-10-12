@@ -1,0 +1,12 @@
+.venv/
+.build/
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.luna-repro/
+.env
+.env.*
+selected-result.json
+result.json
